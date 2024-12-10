@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "ESNext", // Enables ESM-style imports/exports
+    "target": "ES6", // Target a modern version of JavaScript
+    "moduleResolution": "Node", // Resolve modules in Node.js style
+    "strict": true, // Enable strict type checking
+    "esModuleInterop": true, // Handle CommonJS interop
+    "skipLibCheck": true, // Skip library checks for speed
+    "outDir": "dist" // Optional: Output compiled files here
+  },
+  "include": [
+    "src",
+    "**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
