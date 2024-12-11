@@ -1,5 +1,4 @@
 import { fromInput, fromJSON } from "./src/fsmGenerator/generateFSM";
-import { modThree } from "./src/ModuloThreeFSM";
 import readline from 'readline';
 
 const getFileName = () => {
