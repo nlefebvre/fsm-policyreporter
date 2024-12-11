@@ -16,7 +16,7 @@ Node.js v20 or equivalent.
 ## Usage
 
 ### Local Installation
-After copying to your machine (cloning). From the root folder:
+After copying to your machine (cloning), use npm to install from the root folder:
 ```console
 $ npm i
 ```
