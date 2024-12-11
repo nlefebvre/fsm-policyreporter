@@ -1,6 +1,6 @@
 import { State } from "./State";
 
-export class FSMGenerator {
+export class FSM {
   private states: Record<string, State>;
   private initialState: State;
   private currentState: State;

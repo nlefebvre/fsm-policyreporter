@@ -1,6 +1,6 @@
 import readline from 'readline';
 import { readFile } from "fs/promises";
-import { FSMGenerator } from './FSMGenerator';
+import { FSM } from './FSM';
 import { ErrorMsg, validateAll, validateAlphabet, validateFinalStates, validateInitialState, validateStates, validateTransitions } from './InputValidators';
 
 
@@ -17,7 +17,7 @@ export const fromJSON = async (fileName: string) => {
   } else {
     console.log(`Successfully loaded ${jsonFile.title ?? 'finite state machine'}`);
     const { states, initialState, finalStates, transitions } = jsonFile;
-    return new FSMGenerator(states, initialState, finalStates, transitions as [string, string, string][]);
+    return new FSM(states, initialState, finalStates, transitions as [string, string, string][]);
   }
 }
 
@@ -75,7 +75,7 @@ export const fromInput = async () => {
   });
 
   q.close();
-  return new FSMGenerator(states, initialState, finalStates, transitions)
+  return new FSM(states, initialState, finalStates, transitions)
 }
 
 

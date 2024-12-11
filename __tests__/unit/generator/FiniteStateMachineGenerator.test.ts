@@ -1,14 +1,14 @@
-import { FSMGenerator } from "../../../src/fsmGenerator/FSMGenerator"
+import { FSM } from "../../../src/fsmGenerator/FSM"
 import { mockFinalState, mockInitialState, mockStateArray, mockTransitions } from "../../data/mockData";
 
 describe("FSM Tests", () => {
 
   test("FSMGenerator returns object", () => {
-    expect(new FSMGenerator(mockStateArray, mockInitialState, mockFinalState, mockTransitions)).toBeDefined()
+    expect(new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions)).toBeDefined()
   })
 
   test("getState returns state in if exists", () => {
-    const fsm = new FSMGenerator(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
+    const fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
 
     const state = fsm.getStateByValue(mockInitialState);
 
@@ -18,7 +18,7 @@ describe("FSM Tests", () => {
   });
 
   test("getState returns undefined if does not exist", () => {
-    const fsm = new FSMGenerator(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
+    const fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
 
     const state = fsm.getStateByValue("nonexistant state");
 
@@ -26,10 +26,10 @@ describe("FSM Tests", () => {
   });
 
   describe("handleInput tests", () => {
-    let fsm: FSMGenerator;
+    let fsm: FSM;
 
     beforeEach(() => {
-      fsm = new FSMGenerator(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
+      fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
     });
 
     test("handleInput provides response for valid input", () => {
