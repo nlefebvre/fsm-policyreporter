@@ -1,15 +1,15 @@
 {
-  "name": "m3-policyreporter",
+  "name": "fsa-policyreporter",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "start": "tsx ./index.ts",
     "test": "jest"
   },
   "author": "Nicolas Lefebvre",
   "license": "ISC",
-  "description": "For Policy Reporter team.",
+  "description": "For evaluation by Policy Reporter team.",
   "devDependencies": {
     "@jest/types": "^29.6.3",
     "@types/jest": "^29.5.14",
