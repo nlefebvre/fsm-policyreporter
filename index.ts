@@ -1,4 +1,4 @@
-import { fromInput, fromJSON } from "./src/fsmGenerator/generateFSM";
+import { fromInput, fromJSON } from "./src/fsmGenerator/GenerateFSM";
 import readline from 'readline';
 
 const getFileName = () => {

@@ -1,4 +1,4 @@
-import { State } from "../../../src/fsmGenerator/State";
+import { State } from "../../../src/fsm/State";
 
 describe("Tests for State class", () => {
 

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateErrorMessage Tests generates message for multiple errors 1`] = `
+"Test error
+    Alphabet: test alphabet message 
+    State: test state message 
+    Transition function: test tnfn message (For value 'value')
+"
+`;
+
+exports[`generateErrorMessage Tests generates message for single error 1`] = `
+"Test error
+    Alphabet: test message (For value 'value')
+"
+`;

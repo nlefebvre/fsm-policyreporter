@@ -1,28 +1,22 @@
 import { State } from "./State";
 
-export class FSM {
+export class FiniteStateMachine {
   private states: Record<string, State>;
   private initialState: State;
   private currentState: State;
 
-  constructor(
-    states: Array<string>,
-    initialState: string,
-    finalStates: Array<string>,
-    transitions: Array<[string, string, string]>) {
-    this.states = states.reduce((states, stateValue: string) => {
-      return { ...states, [stateValue]: new State(stateValue, false, {}) };
-    }, {})
-    this.initialState = this.states[initialState];
-    this.currentState = this.initialState;
+  constructor(initialState: State) {
+    this.states = { [initialState.value]: initialState };
+    this.initialState = initialState;
+    this.currentState = initialState;
+  }
 
-    finalStates.forEach((finalState) => {
-      this.states[finalState].setFinal(true);
-    });
+  addState(state: State) {
+    this.states[state.value] = state;
+  }
 
-    transitions.forEach(([initState, alpha, final]) => {
-      this.states[initState].addTransition(alpha, this.states[final])
-    })
+  removeStateByValue(stateValue: string) {
+    delete this.states[stateValue];
   }
 
   getStateByValue(value: string) {
@@ -39,6 +33,7 @@ export class FSM {
 
   handleInput(input: string) {
     const inputArray = Array.from(input);
+
     try {
       inputArray.forEach((inputChar) => {
         this.setCurrentState(this.currentState.process(inputChar));

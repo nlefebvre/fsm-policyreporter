@@ -1,24 +1,32 @@
-import { FSM } from "../../../src/fsmGenerator/FSM"
-import { mockFinalState, mockInitialState, mockStateArray, mockTransitions } from "../../data/mockData";
+import { FiniteStateMachine } from "../../../src/fsm/FiniteStateMachine"
+import { State } from "../../../src/fsm/State";
+import { FSMGenerator } from "../../../src/fsmGenerator/FSMGenerator";
+import { mockAlphabet, mockFinalState, mockInitialState, mockStateArray, mockTransitions } from "../../data/mockData";
 
-describe("FSM Tests", () => {
+describe("Finite State Machine Tests", () => {
+  let initialSate: State;
 
-  test("FSMGenerator returns object", () => {
-    expect(new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions)).toBeDefined()
+  beforeEach(() => {
+    initialSate = new State("initial", false, {});
   })
 
-  test("getState returns state in if exists", () => {
-    const fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
 
-    const state = fsm.getStateByValue(mockInitialState);
+  test("constructor returns object", () => {
+    expect(new FiniteStateMachine(initialSate)).toBeDefined();
+  });
+
+  test("getState returns state in if exists", () => {
+    const fsm = new FiniteStateMachine(initialSate);
+
+    const state = fsm.getStateByValue(initialSate.value);
 
     expect(state).toBeDefined();
-    expect(state).toHaveProperty("value", mockInitialState);
+    expect(state).toHaveProperty("value", initialSate.value);
     expect(state).toHaveProperty("finalState");
   });
 
   test("getState returns undefined if does not exist", () => {
-    const fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
+    const fsm = new FiniteStateMachine(initialSate);
 
     const state = fsm.getStateByValue("nonexistant state");
 
@@ -26,10 +34,16 @@ describe("FSM Tests", () => {
   });
 
   describe("handleInput tests", () => {
-    let fsm: FSM;
+    let fsm: FiniteStateMachine;
 
     beforeEach(() => {
-      fsm = new FSM(mockStateArray, mockInitialState, mockFinalState, mockTransitions);
+      fsm = new FSMGenerator()
+        .addStates(mockStateArray)
+        .addAlphabet(mockAlphabet)
+        .addFinalStates(mockFinalState)
+        .setInitialState(mockInitialState)
+        .addTransitions(mockTransitions)
+        .build();
     });
 
     test("handleInput provides response for valid input", () => {

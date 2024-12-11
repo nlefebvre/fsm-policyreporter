@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FSMGenerator Tests build tests build throws error for duplicate states 1`] = `
+"Error building Finite State Machine
+    State: Duplicate States exist in state list (For value 'S0')
+    State: Duplicate States exist in state list (For value 'S1')
+    State: Duplicate States exist in state list (For value 'S2')
+    State: Duplicate States exist in state list (For value 'S3')
+    State: Duplicate States exist in state list (For value 'S4')
+    State: Duplicate States exist in state list (For value 'S5')
+    State: Duplicate States exist in state list (For value 'S6')
+    State: Duplicate States exist in state list (For value 'S7')
+    State: Duplicate States exist in state list (For value 'S8')
+    State: Duplicate States exist in state list (For value 'S9')
+    State: Duplicate States exist in state list (For value 'S10')
+    State: Duplicate States exist in state list (For value 'S12')
+    State: Duplicate States exist in state list (For value 'S13')
+    State: Duplicate States exist in state list (For value 'S14')
+    State: Duplicate States exist in state list (For value 'S15')
+    State: Duplicate States exist in state list (For value 'S16')
+"
+`;
+
+exports[`FSMGenerator Tests build tests build throws error if nothing is defined 1`] = `
+"Error building Finite State Machine
+    State: Must include at least one state 
+    Alphabet: Must include at east one alphabet 
+    State: Must include an initial state 
+    State: Must include a final state 
+"
+`;
