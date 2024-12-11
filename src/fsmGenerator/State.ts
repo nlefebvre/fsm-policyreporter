@@ -9,7 +9,7 @@ export class State {
     this.transition = transition;
   }
 
-  addTransition(alpha: string, state: State) {
+  addTransition(alpha: string, state: State): void {
     if (this.transition[alpha]) {
       throw Error(`Transition already exists!`)
     } else {
@@ -17,7 +17,7 @@ export class State {
     }
   }
 
-  removeTransition(alpha: string) {
+  removeTransition(alpha: string): void {
     this.transition[alpha] = null;
   }
 
@@ -25,11 +25,11 @@ export class State {
     this.finalState = isFinal;
   }
 
-  isFinal() {
+  isFinal(): boolean {
     return this.finalState;
   }
 
-  process(alpha: string) {
+  process(alpha: string): State {
     if (this.transition[alpha]) {
       return this.transition[alpha]
     }
