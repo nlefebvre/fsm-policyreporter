@@ -1,4 +1,4 @@
-import { transitionFnErrors, validateTransitions } from "../../../src/fsmGenerator/InputValidators";
+import { transitionFnErrors, validateTransitions } from "../../../src/validation/InputValidators";
 
 describe("Transition Validation Tests", () => {
   const validStates = ["S0", "S1", "S2"];

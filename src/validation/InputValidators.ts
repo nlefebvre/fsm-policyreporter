@@ -1,14 +1,5 @@
-enum FSMPart {
-  STATE = "State",
-  ALPHABET = "Alphabet",
-  TRANSITION_FN = "Transition function"
-}
+import { ErrorMsg, FSMPart } from "./Errors";
 
-export interface ErrorMsg {
-  inputValue: string | Array<string> | null;
-  type: FSMPart;
-  message: string;
-}
 
 
 export const stateErrors = {

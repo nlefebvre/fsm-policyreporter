@@ -1,4 +1,4 @@
-import { finalStateErrors, validateFinalStates } from "../../../src/fsmGenerator/InputValidators";
+import { finalStateErrors, validateFinalStates } from "../../../src/validation/InputValidators";
 
 describe("Final State Validation Tests", () => {
 

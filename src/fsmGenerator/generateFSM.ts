@@ -1,7 +1,8 @@
 import readline from 'readline';
 import { readFile } from "fs/promises";
 import { FSM } from './FSM';
-import { ErrorMsg, validateAll, validateAlphabet, validateFinalStates, validateInitialState, validateStates, validateTransitions } from './InputValidators';
+import { validateAll, validateAlphabet, validateFinalStates, validateInitialState, validateStates, validateTransitions } from '../validation/InputValidators';
+import { generateErrorMessage } from '../validation/Errors';
 
 
 async function readJsonFile(path: string) {
@@ -92,10 +93,3 @@ const getInput = async <T>(inputFn: () => Promise<T>, validateFn: (input: T) => 
 
 }
 
-
-
-const generateErrorMessage = (title: string, errors: Array<ErrorMsg>) => {
-  return errors.reduce<string>((errorString, { type, message, inputValue }) => {
-    return errorString += `    ${type}: ${message} ${inputValue !== null ? `(For value '${inputValue}')` : ''}\n`
-  }, title + "\n")
-}

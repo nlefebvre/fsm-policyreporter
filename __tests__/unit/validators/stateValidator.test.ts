@@ -1,4 +1,4 @@
-import { stateErrors, validateStates } from "../../../src/fsmGenerator/InputValidators";
+import { stateErrors, validateStates } from "../../../src/validation/InputValidators";
 
 describe("State Validation Tests", () => {
 

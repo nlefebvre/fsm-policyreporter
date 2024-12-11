@@ -1,4 +1,4 @@
-import { alphabetErrors, validateAlphabet } from "../../../src/fsmGenerator/InputValidators";
+import { alphabetErrors, validateAlphabet } from "../../../src/validation/InputValidators";
 
 describe("Alphabet Validation Tests", () => {
 

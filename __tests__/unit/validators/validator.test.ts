@@ -1,4 +1,4 @@
-import * as validators from "../../../src/fsmGenerator/InputValidators";
+import * as validators from "../../../src/validation/InputValidators";
 const { validateAll } = validators;
 
 describe("Validation Tests", () => {

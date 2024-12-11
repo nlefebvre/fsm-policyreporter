@@ -1,4 +1,4 @@
-import { initialStateErrors, validateInitialState } from "../../../src/fsmGenerator/InputValidators";
+import { initialStateErrors, validateInitialState } from "../../../src/validation/InputValidators";
 
 describe("Initial State Validation Tests", () => {
 
