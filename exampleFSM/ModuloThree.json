@@ -12,7 +12,8 @@
   "initialState": "S0",
   "finalStates": [
     "S0",
-    "S1"
+    "S1",
+    "S2"
   ],
   "transitions": [
     [

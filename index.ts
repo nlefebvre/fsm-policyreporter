@@ -2,47 +2,45 @@ import { fromInput, fromJSON } from "./src/fsmGenerator/generateFSM";
 import { modThree } from "./src/ModuloThreeFSM";
 import readline from 'readline';
 
-const binaryToDec = (bin: string) => {
-  Array.from(bin).every((char) => char === "0" || char === "1")
-  return parseInt(bin, 2);
+const getFileName = () => {
+  return process.argv[2];
+}
+
+const fileName = getFileName();
+let fsm;
+
+if (fileName) {
+  fsm = await fromJSON(fileName);
+} else {
+  fsm = await fromInput();
 }
 
 
-const fsm = fromJSON();
-// const fsm = await fromInput();
+const q = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-if (fsm) {
+const ask = (msg: string) => new Promise(resolve =>
+  q.question(msg, response => resolve(response))
+);
 
-
-
-  const q = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  const ask = (msg: string) => new Promise(resolve =>
-    q.question(msg, response => resolve(response))
-  );
-
-  const modThreeLoop2 = async () => {
-    const res = await ask("Input: ");
-    if (res && typeof res === "string") {
-      const state = fsm!.handleInput(res);
-      if (state.isFinal()) {
-        console.log(state.value);
-      } else {
-        console.log(`Error: state '%{state.value}' is not a final state`);
-      }
-      fsm!.reset();
-
-      const decimal = binaryToDec(res);
-      console.log(`binary ${res} => ${decimal} % 3 is ${decimal % 3}`);
-      modThreeLoop2();
+const processFSMInput = async () => {
+  const res = await ask("Input: ");
+  if (res && typeof res === "string") {
+    const state = fsm!.handleInput(res);
+    if (state.isFinal()) {
+      console.log(state.value);
     } else {
-      q.close()
+      console.log(`Error: state '${state.value}' is not a final state`);
     }
+    fsm!.reset();
+    processFSMInput();
+  } else {
+    q.close()
   }
-
-  console.log('Submit value to generated state machine:');
-  modThreeLoop2();
 }
+
+console.log('Submit value to generated finite state machine:');
+processFSMInput();
+

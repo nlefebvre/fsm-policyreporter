@@ -1,15 +1,22 @@
 import readline from 'readline';
-import ModuloThree from '../../exampleFSM/ModuloThree.json';
+import { readFile } from "fs/promises";
 import { FSMGenerator } from './FSMGenerator';
 import { ErrorMsg, validateAll, validateAlphabet, validateFinalStates, validateInitialState, validateStates, validateTransitions } from './InputValidators';
 
-export const fromJSON = () => {
-  console.log(ModuloThree)
-  const errors = validateAll(ModuloThree);
+
+async function readJsonFile(path: string) {
+  const file = await readFile(path, "utf8");
+  return JSON.parse(file);
+}
+
+export const fromJSON = async (fileName: string) => {
+  const jsonFile = await readJsonFile(fileName)
+  const errors = validateAll(jsonFile);
   if (errors.length > 0) {
     console.error(generateErrorMessage("Error generating FSM from JSON", errors));
   } else {
-    const { states, initialState, finalStates, transitions } = ModuloThree;
+    console.log(`Successfully loaded ${jsonFile.title ?? 'finite state machine'}`);
+    const { states, initialState, finalStates, transitions } = jsonFile;
     return new FSMGenerator(states, initialState, finalStates, transitions as [string, string, string][]);
   }
 }
