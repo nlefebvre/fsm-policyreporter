@@ -50,6 +50,17 @@ export const fromInput = async () => {
     return validateFinalStates(states, finStates);
   });
 
+
+  const ingestTransition = async (transitions: Array<[string, string, string]>) => {
+    const transitionInput = await ask("Input transition(comma delimited as startState, alphabet, endState). blank line once complete:");
+    if (transitionInput) {
+      const [start, alphabet, end] = transitionInput.split(",", 3)
+      transitions.push([start, alphabet, end]);
+      return ingestTransition(transitions);
+    }
+    return transitions;
+  }
+
   const transitions = await getInput(async () => {
     return await ingestTransition([]);
   }, (trans: Array<[string, string, string]>) => {
@@ -60,15 +71,6 @@ export const fromInput = async () => {
   return new FSMGenerator(states, initialState, finalStates, transitions)
 }
 
-const ingestTransition = async (transitions: Array<[string, string, string]>) => {
-  const transitionInput = await ask("Input transition(comma delimited as startState, alphabet, endState). blank line once complete:");
-  if (transitionInput) {
-    const [start, alphabet, end] = transitionInput.split(",", 3)
-    transitions.push([start, alphabet, end]);
-    return ingestTransition(transitions);
-  }
-  return transitions;
-}
 
 const getInput = async <T>(inputFn: () => Promise<T>, validateFn: (input: T) => Array<ErrorMsg>) => {
   const input = await inputFn();

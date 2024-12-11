@@ -11,7 +11,7 @@ export interface ErrorMsg {
 }
 
 
-const stateErrors = {
+export const stateErrors = {
   duplicateEntries: "Duplicate States exist in state list",
   noEntries: "Must include at least one state"
 }
@@ -29,9 +29,9 @@ const findDuplicate = (set: Array<string>): Array<string> => {
 }
 
 
-export const validateStates = (stateArray: Array<string>): Array<ErrorMsg> => {
+export const validateStates = (stateArray?: Array<string>): Array<ErrorMsg> => {
   // empty array
-  if (stateArray.length === 0) {
+  if (!stateArray || stateArray.length === 0) {
     return [
       {
         inputValue: null,
@@ -53,7 +53,7 @@ export const validateStates = (stateArray: Array<string>): Array<ErrorMsg> => {
   });
 }
 
-const alphabetErrors = {
+export const alphabetErrors = {
   noEntries: "Must include at east one alphabet",
   duplicateEntries: "Duplicate alphabet character exist in state list",
 
@@ -61,7 +61,7 @@ const alphabetErrors = {
 
 export const validateAlphabet = (alphabetArray: Array<string>): Array<ErrorMsg> => {
   // empty array
-  if (alphabetArray.length === 0) {
+  if (!alphabetArray || alphabetArray.length === 0) {
     return [
       {
         inputValue: null,
@@ -86,7 +86,7 @@ export const validateAlphabet = (alphabetArray: Array<string>): Array<ErrorMsg> 
 }
 
 
-const initialStateErrors = {
+export const initialStateErrors = {
   invalidState: "Initial state does not exist on state list",
   noState: "Must include an initial state",
 }
@@ -115,13 +115,13 @@ export const validateInitialState = (stateArray: Array<string>, initialState: st
 }
 
 
-const finalStateErrors = {
+export const finalStateErrors = {
   invalidState: "Final state(s) don't exist on state list",
   noState: "Must include a final state",
 }
 
 export const validateFinalStates = (stateArray: Array<string>, finalStateArray: Array<string>): Array<ErrorMsg> => {
-  if (finalStateArray.length === 0) {
+  if (!finalStateArray || finalStateArray.length === 0) {
     return [
       {
         inputValue: null,
@@ -146,14 +146,25 @@ export const validateFinalStates = (stateArray: Array<string>, finalStateArray: 
 }
 
 
-const transitionFnErrors = {
+export const transitionFnErrors = {
+  noEntry: "No transitions found",
   missingStartingState: "Transition has invalid starting state",
   missingEndingState: "Transition has invalid ending state",
   missingTransition: "Transition value does not exist in alphabet"
 };
 
-export const validateTransitions = (stateArray: Array<string>, alphabet: Array<string>, transitions: Array<[string, string, string]>): Array<ErrorMsg> => {
+export const validateTransitions = (stateArray: Array<string>, alphabet: Array<string>, transitions?: Array<[string, string, string]>): Array<ErrorMsg> => {
   const errors: Array<ErrorMsg> = [];
+
+  if (!transitions) {
+    return [
+      {
+        inputValue: null,
+        type: FSMPart.STATE,
+        message: transitionFnErrors.noEntry
+      }
+    ]
+  }
 
   transitions.forEach(([startingState, transitionVal, endingState]) => {
 
@@ -187,7 +198,7 @@ export const validateTransitions = (stateArray: Array<string>, alphabet: Array<s
   return errors;
 }
 
-export const validateAll = (json: unknown) => {
+export const validateAll = (json: Record<string, any>) => {
   const errors = []
   errors.push(...validateStates(json.states));
   errors.push(...validateAlphabet(json.alphabet));
