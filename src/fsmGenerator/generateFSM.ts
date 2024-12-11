@@ -5,7 +5,7 @@ import { ErrorMsg, generateErrorMessage } from '../validation/Errors';
 import { FSMGenerator } from './FSMGenerator';
 
 
-const readJsonFile = async (path: string) => {
+export const readJsonFile = async (path: string) => {
   const file = await readFile(path, "utf8");
   return JSON.parse(file);
 }
