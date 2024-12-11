@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tests for State class transitions process throws error transition does not exist 1`] = `"Missing transition for value up on state 'two'"`;

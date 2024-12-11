@@ -33,6 +33,6 @@ export class State {
     if (this.transition[alpha]) {
       return this.transition[alpha]
     }
-    throw Error(`Missing transition for value ${alpha} on state '${this.value}`)
+    throw Error(`Missing transition for value ${alpha} on state '${this.value}'`)
   }
 }
