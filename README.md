@@ -60,9 +60,20 @@ npm run test
 ```
 
 ### Future Plans
-* Run local server
-* Allow More rigorous validation, validation flags
+
+* If consumers would prefer a service to generate FSMs:
+  * Create server with endpoints for submitting FSM, and submitting inputs
+* If instead consumers would prefer a UI component:
+  * Build UI in react with inputs for all tuples, and inputs
+  * Would it be possible to visualize "graph" (state and transitions)?
+* Allow more rigorous validation, validation flags:
+  * Allow categorization of warnings vs errors (e.g. ius a duplicate state an error, or just a warning?)
+  * Warnings instead of errors for duplication
+  * Warnings for "detached" stated (0 transitions in or out)
+  * Flags to strictly stop on warnings, or to bypass them
 * Support adding/editing/removing states, transitions, etc.
+  * Must also consider handling all other states that reference the state
+* More robust alphabet options. Should multi-characters in alphabet be allowed? how to differentiate (comma-delimited, fixed widths, etc.)
 
 ### Assumptions
 * Alphabets are sets of *single characters*. They cannot be multiple characters, nor have duplicate characters.
