@@ -11,5 +11,17 @@
   ],
   "transform": {
     "^.+\\.ts$": "ts-jest"
-  }
+  },
+  "verbose": true,
+  "collectCoverage": true,
+  "coverageReporters": [
+    "text",
+    "html"
+  ],
+  "collectCoverageFrom": [
+    "**/*.{js,ts}",
+    "!**/node_modules/**",
+    "!**/coverage/**",
+    "!**/index.ts"
+  ]
 }
